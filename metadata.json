@@ -1,0 +1,6 @@
+{
+  "name": "HiveOps - Autonomous SRE & Durability Engine",
+  "description": "Interactive system explorer and simulation sandbox for autonomous telemetry-driven self-healing software engineering, Temporal agent workflows, and repair durability awareness.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

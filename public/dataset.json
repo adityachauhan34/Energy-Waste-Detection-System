@@ -1,0 +1,172 @@
+{
+  "project": "VoltHive: Autonomous Factory Energy Waste & Durability Engine",
+  "version": "1.0.0",
+  "schemaVersion": "2026.10",
+  "description": "Industrial sub-meter electrical telemetry, multi-sensor correlation records, diagnosed root causes, and post-maintenance durability verification logs.",
+  "factoryMetadata": {
+    "plantName": "Apex Precision Manufacturing Plant #4",
+    "location": "North Industrial Zone",
+    "utilityTariffPerKwh": 0.15,
+    "monitoringSubMeters": 6,
+    "lastAuditTimestamp": "2026-10-25T11:26:00Z"
+  },
+  "plantKPIs": {
+    "totalActiveMachines": 6,
+    "totalCurrentDemandKw": 681.3,
+    "totalNominalBaselineKw": 585.0,
+    "currentWasteRateKw": 95.6,
+    "costRateWastedDollarsPerHour": 14.34,
+    "monthlySavingsRealizedDollars": 12450.0,
+    "durabilityFixRate": 96.8,
+    "meanTimeToDetectMinutes": 3.8,
+    "meanTimeToRemediateHours": 1.8,
+    "recurringLeaksPrevented": 38
+  },
+  "factoryMachines": [
+    {
+      "id": "mac-compressor-c3",
+      "name": "Industrial Rotary Screw Compressor #3",
+      "tag": "CMP-03-PNEUM",
+      "location": "Utility Bay B - South Wing",
+      "category": "Compressed Air",
+      "nominalPowerKw": 45.0,
+      "currentPowerKw": 92.4,
+      "baselineKw": 45.0,
+      "status": "ANOMALY_DETECTED",
+      "activeAnomalyId": "inc-pneu-leak-401",
+      "powerFactor": 0.81,
+      "dailyCost": 288.4,
+      "runningHoursPerDay": 24
+    },
+    {
+      "id": "mac-chiller-beta",
+      "name": "Central Process Water Chiller Beta",
+      "tag": "CHL-02-HVAC",
+      "location": "Central Plant Roof Level",
+      "category": "HVAC & Chillers",
+      "nominalPowerKw": 88.0,
+      "currentPowerKw": 136.2,
+      "baselineKw": 88.0,
+      "status": "ANOMALY_DETECTED",
+      "activeAnomalyId": "inc-chiller-foul-402",
+      "powerFactor": 0.86,
+      "dailyCost": 442.0,
+      "runningHoursPerDay": 24
+    },
+    {
+      "id": "mac-molding-cell4",
+      "name": "Hydraulic Injection Molding Machine 4",
+      "tag": "IMM-04-HYDR",
+      "location": "Plastics Hall Bay 2",
+      "category": "Hydraulics & Molding",
+      "nominalPowerKw": 55.0,
+      "currentPowerKw": 56.1,
+      "baselineKw": 55.0,
+      "status": "OPTIMAL",
+      "powerFactor": 0.92,
+      "dailyCost": 198.0,
+      "runningHoursPerDay": 16
+    },
+    {
+      "id": "mac-conveyor-loop2",
+      "name": "Packaging Line Conveyor Drive Loop 2",
+      "tag": "CNV-02-DRIVE",
+      "location": "Packaging & Warehouse Floor",
+      "category": "Motors & Drives",
+      "nominalPowerKw": 18.0,
+      "currentPowerKw": 18.2,
+      "baselineKw": 18.0,
+      "status": "ANOMALY_DETECTED",
+      "activeAnomalyId": "inc-conveyor-idle-403",
+      "powerFactor": 0.88,
+      "dailyCost": 65.0,
+      "runningHoursPerDay": 18
+    },
+    {
+      "id": "mac-furnace-blower",
+      "name": "Tempering Furnace Exhaust Blower 1",
+      "tag": "BLW-01-THERM",
+      "location": "Heat Treatment Area",
+      "category": "Motors & Drives",
+      "nominalPowerKw": 37.0,
+      "currentPowerKw": 38.0,
+      "baselineKw": 37.0,
+      "status": "OPTIMAL",
+      "powerFactor": 0.89,
+      "dailyCost": 136.0,
+      "runningHoursPerDay": 20
+    },
+    {
+      "id": "mac-substation-feeder",
+      "name": "11kV Feeder Transformer Substation 1",
+      "tag": "SUB-01-GRID",
+      "location": "Main Electrical Yard",
+      "category": "Transformers & Distribution",
+      "nominalPowerKw": 320.0,
+      "currentPowerKw": 341.0,
+      "baselineKw": 320.0,
+      "status": "OPTIMAL",
+      "powerFactor": 0.94,
+      "dailyCost": 1220.0,
+      "runningHoursPerDay": 24
+    }
+  ],
+  "incidents": [
+    {
+      "id": "inc-pneu-leak-401",
+      "machineId": "mac-compressor-c3",
+      "machineName": "Industrial Rotary Screw Compressor #3",
+      "severity": "CRITICAL",
+      "detectedAt": "24 mins ago",
+      "metricAnomalous": "Active Power (kW) & Rapid Cycling Load Rate",
+      "excessKw": 47.4,
+      "estimatedWasteDollarsPerHour": 7.11,
+      "estimatedWasteDollarsPerMonth": 5119.2,
+      "co2KgPerHour": 21.3,
+      "detectionConfidence": 0.97,
+      "sensorCorrelations": {
+        "productionSurgeRuledOut": true,
+        "productionExplanation": "Packaging line is running at normal 340 units/hr (no production surge occurred).",
+        "vibrationAnomalyDetected": true,
+        "vibrationDetails": "Motor drive vibration elevated at 4.6 mm/s (nominal < 1.8 mm/s).",
+        "temperatureAnomalyDetected": true,
+        "temperatureDetails": "Oil sump discharge temperature spiked to 92°C (nominal 76°C).",
+        "pressureLossDetected": true,
+        "pressureDetails": "Manifold pressure fluctuates between 5.8 bar and 6.4 bar."
+      },
+      "rootCauseTitle": "Ruptured Solenoid Unloader Valve & Header Flange Leak",
+      "rootCauseDescription": "The electro-pneumatic unloader valve failed in an intermediate state, preventing the compressor from entering idle standby. Combined with a 6mm ruptured seal on Header Line #4, the motor runs continuously at near 100% load during zero-demand intervals.",
+      "recommendedFix": "1. Replace damaged unloader diaphragm kit. 2. Torque Header Flange #4 bolts to 85 Nm.",
+      "requiredParts": ["Unloader Solenoid Kit (CMP-UK-03)", "EPDM High-Pressure Gasket 4\""],
+      "estimatedFixTimeHours": 1.5,
+      "wsjf": {
+        "financialWasteCost": 9,
+        "productionRisk": 7,
+        "assetDamageRisk": 8,
+        "maintenanceJobSize": 2,
+        "score": 12.0
+      },
+      "workOrder": {
+        "ticketId": "WO-ENERG-2026-884",
+        "assignedTech": "Marcus Vance",
+        "priority": "P0 - IMMEDIATE EMERGENCY",
+        "dispatchStatus": "DISPATCHED"
+      },
+      "verification": {
+        "windowProfile": "DURABILITY_48H",
+        "windowHours": 48,
+        "postMaintenanceKw": 45.2,
+        "baselineTargetKw": 45.0,
+        "outcome": "RESOLVED",
+        "stabilityScore": 98.4
+      },
+      "telemetryHistory": [
+        { "timestamp": "09:00", "powerKw": 45.1, "vibrationMmS": 1.4, "temperatureC": 75.2, "productionUnitsPerHour": 340, "pressureBar": 7.0 },
+        { "timestamp": "09:30", "powerKw": 46.0, "vibrationMmS": 1.5, "temperatureC": 76.0, "productionUnitsPerHour": 342, "pressureBar": 6.9 },
+        { "timestamp": "10:00", "powerKw": 68.2, "vibrationMmS": 2.8, "temperatureC": 81.4, "productionUnitsPerHour": 338, "pressureBar": 6.4 },
+        { "timestamp": "10:14", "powerKw": 92.4, "vibrationMmS": 4.6, "temperatureC": 92.0, "productionUnitsPerHour": 340, "pressureBar": 5.8 },
+        { "timestamp": "10:30", "powerKw": 93.1, "vibrationMmS": 4.7, "temperatureC": 93.5, "productionUnitsPerHour": 341, "pressureBar": 5.7 }
+      ]
+    }
+  ]
+}
